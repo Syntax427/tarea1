@@ -5,10 +5,15 @@ import java.util.Iterator;
 public class OrdenCompra {
     private Date fecha;
     private String estado;
-    private ArrayList<DetalleOrden> detalles = new ArrayList();
+    private ArrayList<DetalleOrden> detalles;
+    private ArrayList<Pago> pagos;
+    private float deuda;
     public OrdenCompra(ArrayList<Articulo> pedido, Date fecha, String estado) {
         this.fecha = fecha;
         this.estado = estado;
+        detalles = new ArrayList<>();
+        pagos = new ArrayList<>();
+        deuda = calcPrecio();
         while(!pedido.isEmpty()){
 
             Articulo articulo = pedido.get(0);
@@ -46,6 +51,24 @@ public class OrdenCompra {
             suma += detalle.calcPeso();
         }
         return suma;
+    }
+    public void pagar(Pago pago){
+        pagos.add(pago);
+        float totalpagado = 0;
+        for (Pago paga : pagos){
+            totalpagado += paga.getMonto();
+        }
+        deuda = calcPrecio() - totalpagado;
+
+        if (totalpagado < this.calcPrecio()){
+            estado = "Por pagar";
+        }
+        else if (totalpagado == this.calcPrecio()){
+            estado = "Pagado";
+        }
+    }
+    float getDeuda(){
+        return deuda;
     }
 
 }
