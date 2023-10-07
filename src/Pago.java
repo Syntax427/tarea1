@@ -4,11 +4,11 @@ public class Pago {
     private float monto;
     private Date fecha;
     private OrdenCompra compraAsociada;
-    private float deuda;
+    private float deudaAPagar;
 
     public Pago(OrdenCompra compra, float monto, Date fecha) {
         this.compraAsociada = compra;
-        this.deuda = compraAsociada.getDeuda();
+        this.deudaAPagar = compraAsociada.getDeuda();
         this.monto = monto;
         this.fecha = fecha;
     }
@@ -17,11 +17,21 @@ public class Pago {
         return this.monto;
     }
 
+    public void setMonto(float monto) {
+        this.monto = monto;
+    }
+
     public Date getFecha() {
         return this.fecha;
     }
 
     public float getDeuda() {
-        return deuda;
+        return deudaAPagar;
+    }
+
+    @Override
+    public String toString() {
+        return "Pago : Monto: " + monto +
+                ", Fecha: " + fecha;
     }
 }

@@ -20,4 +20,13 @@ public class DetalleOrden {
     public int getCantidad() {
         return this.cantidad;
     }
+
+    @Override
+    public String toString() {
+        return "DetalleOrden : Cantidad: " + cantidad +
+                ", Articulo: " + pedido.getNombre() +
+                ", Precio sin IVA: " + calcPrecioSinIVA() +
+                ", Precio con IVA: " + calcPrecio() +
+                ", Peso: " + calcPeso();
+    }
 }

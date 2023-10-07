@@ -3,7 +3,12 @@ public class Direccion {
     public Direccion(String direccion){
         this.direccion = direccion;
     }
-    public String getDireccion(){
+    public String getDireccion() {
         return direccion;
+    }
+
+    @Override
+    public String toString() {
+        return "Direccion : " + direccion;
     }
 }
