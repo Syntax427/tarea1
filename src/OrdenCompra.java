@@ -3,17 +3,22 @@ import java.util.Date;
 import java.util.Iterator;
 
 public class OrdenCompra {
+    private Cliente comprador;
     private Date fecha;
     private String estado;
     private ArrayList<DetalleOrden> detalles;
     private ArrayList<Pago> pagos;
     private float deuda;
-    public OrdenCompra(ArrayList<Articulo> pedido, Date fecha, String estado) {
+    private DocTributario documentoAsociado;
+    public OrdenCompra(Cliente comprador, ArrayList<Articulo> pedido, Date fecha, String estado) {
+        this.comprador = comprador;
         this.fecha = fecha;
         this.estado = estado;
         detalles = new ArrayList<>();
         pagos = new ArrayList<>();
         deuda = calcPrecio();
+        documentoAsociado = null;
+
         while(!pedido.isEmpty()){
 
             Articulo articulo = pedido.get(0);
@@ -31,6 +36,7 @@ public class OrdenCompra {
             }
             detalles.add(new DetalleOrden(cantidad, articulo));
         }
+
     }
     public float calcPrecioSinIVA() {
         float suma = 0.0F;
@@ -71,4 +77,11 @@ public class OrdenCompra {
         return deuda;
     }
 
+    public void setDocumentoAsociado(DocTributario documentoAsociado) {
+        this.documentoAsociado = documentoAsociado;
+    }
+
+    public DocTributario getDocumentoAsociado() {
+        return documentoAsociado;
+    }
 }
